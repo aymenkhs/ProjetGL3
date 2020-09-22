@@ -26,6 +26,7 @@ public class Ascenseur {
         list_appels.add(u);
     }
 
+
     public void updateDirection(){
         /*
             we update the direction after adding a new call from the user or after arriving on the destination based on the rules of the TP
@@ -54,6 +55,33 @@ public class Ascenseur {
         }
         System.out.println("+ Ascenseur arriver à l'etage n°" + etageCourrant);
         // chezck if the current etage has anyone moving from the elevator in it
-        // chezck if the current etage has anyone entering the elevator in it 
+        this.moving_from();
+        // chezck if the current etage has anyone entering the elevator in it
+        this.moving_to();
     }
+
+    private void moving_from(){
+        for (Usager usager : this.list_destinations){
+            if (usager.getDestination() == this.etageCourrant){
+                // open the gates
+                usager.sortir();
+                // close the gates
+                this.list_destinations.remove(usager);
+            }
+        }
+    }
+
+    private void moving_to(){
+        for (Usager usager : this.list_appels){
+            if (usager.getEtageCourrant() == this.etageCourrant){
+                // open the gates
+                usager.entrer();
+                // close the gates
+                this.list_appels.remove(usager);
+                this.list_destinations.add(usager);
+            }
+        }
+    }
+
+
 }

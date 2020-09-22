@@ -31,11 +31,15 @@ public class Usager {
         */
     }
 
+    public void entrer(){}
+
     public void signaler_destination(int destination){
         // here we're going to let the user enter the destination he's going to
         this.destination = destination;
     }
 
-    public void sortir(){} // we really don't need this function
+    public void sortir(){} // well we need it
+
+
 
 }
