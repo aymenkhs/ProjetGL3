@@ -1,11 +1,13 @@
+import enums.Status;
+
 public class Porte {
 
     private int etage;
-    private String status; // "closed" or "open"
+    private Status status; // "closed" or "open"
 
     public Porte(int etage) {
         this.etage = etage;
-        this.status = "closed";
+        this.status = Status.Closed;
     }
 
     public int getEtage() {
@@ -13,14 +15,14 @@ public class Porte {
     }
 
     public boolean isTheDoorClosed() {
-        return status.equals("closed");
+        return status.equals(Status.Closed);
     }
 
     public void closeTheDoor() {
-        this.status = "closed";
+        this.status = Status.Closed;
     }
 
     public void openTheDoor() {
-        this.status = "open";
+        this.status = Status.Open;
     }
 }

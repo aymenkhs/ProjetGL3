@@ -1,10 +1,12 @@
+import enums.Direction;
+
 public class Usager {
 
     private int etageCourrant;
     private int destination;
-    private String direction;
+    private Direction direction;
 
-    public Usager(int etageCourrant, String direction) {
+    public Usager(int etageCourrant, Direction direction) {
         this.etageCourrant = etageCourrant;
 
         this.direction = direction;
@@ -18,7 +20,7 @@ public class Usager {
         return destination;
     }
 
-    public String getDirection() {
+    public Direction getDirection() {
         return direction;
     }
 
@@ -29,7 +31,7 @@ public class Usager {
         */
     }
 
-    public void signaler_destination( int destination){
+    public void signaler_destination(int destination){
         // here we're going to let the user enter the destination he's going to
         this.destination = destination;
     }

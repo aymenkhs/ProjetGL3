@@ -1,3 +1,5 @@
+import enums.Direction;
+
 import java.util.ArrayList;
 
 public class Ascenseur {
@@ -6,7 +8,7 @@ public class Ascenseur {
     private ArrayList<Porte> list_portes;
 
     private int etageCourrant;
-    private String direction;
+    private Direction direction;
     private ArrayList<Usager> list_destinations;
     private ArrayList<Usager> list_appels;
 
@@ -15,7 +17,7 @@ public class Ascenseur {
         this.list_portes = list_portes;
 
         this.etageCourrant = 0;
-        this.direction = "none";
+        this.direction = Direction.Up;
         this.list_appels = new ArrayList<Usager>();
         this.list_destinations = new ArrayList<Usager>();
     }
@@ -31,9 +33,9 @@ public class Ascenseur {
 
         // here maybe we should put the direction to "none" cause there's no direction, or we should remove the direction entirely
         if (etageCourrant ==  nb_etages){
-            direction = "down";
+            direction = Direction.Down;
         }else if(etageCourrant ==  0){
-            direction = "up";
+            direction = Direction.Up;
         }
     }
 
@@ -41,13 +43,13 @@ public class Ascenseur {
         /*
             we move until we arrive at the destination
         */
-        if (direction.equals("none")){
+        if (list_appels.isEmpty() && list_destinations.isEmpty()){
             return;
         }
 
-        if (direction.equals("up")){
+        if (direction.equals(Direction.Up)){
             etageCourrant ++;
-        } else if (direction.equals("down")){
+        } else if (direction.equals(Direction.Down)){
             etageCourrant --;
         }
         System.out.println("+ Ascenseur arriver à l'etage n°" + etageCourrant);
