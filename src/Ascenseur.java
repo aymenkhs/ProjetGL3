@@ -49,6 +49,12 @@ public class Ascenseur {
                 }
             }
         }
+
+        if (direction == Direction.Up){
+            System.out.println("ASCENSEUR: direction vers le haut");
+        }else{
+            System.out.println("ASCENSEUR: direction vers le bas");
+        }
     }
 
     public void deplacer(){
@@ -93,6 +99,4 @@ public class Ascenseur {
             }
         }
     }
-
-
 }

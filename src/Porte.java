@@ -19,10 +19,12 @@ public class Porte {
     }
 
     public void closeTheDoor() {
+        System.out.println("PORTE : Fermeture de la porte de l'etage" + this.etage);
         this.status = Status.Closed;
     }
 
     public void openTheDoor() {
+        System.out.println("PORTE : Ouverture de la porte de l'etage" + this.etage);
         this.status = Status.Open;
     }
 }
