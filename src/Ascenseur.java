@@ -17,7 +17,7 @@ public class Ascenseur {
         this.list_portes = list_portes;
 
         this.etageCourrant = 0;
-        this.direction = Direction.Up;
+        this.direction = Direction.None;
         this.list_appels = new ArrayList<Usager>();
         this.list_destinations = new ArrayList<Usager>();
     }
@@ -37,31 +37,75 @@ public class Ascenseur {
         if (!this.list_destinations.isEmpty()){
             if (this.list_destinations.get(0).getDestination() > this.etageCourrant){
                 this.direction = Direction.Up;
-            }else {
+            }else{
                 this.direction = Direction.Down;
             }
-        }else {
-            if (!this.list_appels.isEmpty()){
-                if (this.list_destinations.get(0).getEtageCourrant() > this.etageCourrant){
+        }else if (!this.list_appels.isEmpty()){
+
+            if (direction == Direction.Up || direction == Direction.None){
+                // check if there is a call up
+                if (check_call_up()) {
                     this.direction = Direction.Up;
-                }else {
+                }else{
+                    // check if there is a call down
+                    if (check_call_down()){
+                        this.direction = Direction.Down;
+                    }else{
+                        this.direction = Direction.None;
+                    }
+                }
+            }else{
+                // check if there is a call down
+                if (check_call_down()){
                     this.direction = Direction.Down;
+                }else{
+                    // check if there is a call up
+                    if (check_call_up()){
+                        this.direction = Direction.Up;
+                    }else{
+                        this.direction = Direction.None;
+                    }
                 }
             }
+        }else{
+            this.direction = Direction.None;
         }
 
         if (direction == Direction.Up){
             System.out.println("ASCENSEUR: direction vers le haut");
-        }else{
+        }else if (direction == Direction.Down){
             System.out.println("ASCENSEUR: direction vers le bas");
         }
+    }
+
+    private boolean check_call_up(){
+        for (Usager u : this.list_appels){
+            if (u.getEtageCourrant() > this.etageCourrant){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean check_call_down(){
+        for (Usager u : this.list_appels){
+            if (u.getEtageCourrant() < this.etageCourrant){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void deplacer(){
         /*
             we move until we arrive at the destination
         */
-        if (list_appels.isEmpty() && list_destinations.isEmpty()){
+        if (this.direction == Direction.None){
+            if (list_appels.isEmpty() && list_destinations.isEmpty()){
+                return;
+            }
+            this.check_etage();
+            this.updateDirection();
             return;
         }
 
@@ -71,6 +115,11 @@ public class Ascenseur {
             etageCourrant --;
         }
         System.out.println("+ Ascenseur arriver à l'etage n°" + etageCourrant);
+        this.check_etage();
+        this.updateDirection();
+    }
+
+    private void check_etage(){
         // chezck if the current etage has anyone moving from the elevator in it
         this.moving_from();
         // chezck if the current etage has anyone entering the elevator in it
@@ -91,7 +140,9 @@ public class Ascenseur {
     private void moving_to(){
         for (Usager usager : this.list_appels){
             if (usager.getEtageCourrant() == this.etageCourrant){
+
                 // open the gates
+
                 usager.entrer();
                 // close the gates
                 this.list_appels.remove(usager);

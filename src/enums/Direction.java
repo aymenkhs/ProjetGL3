@@ -1,5 +1,5 @@
 package enums;
 
 public enum Direction {
-    Up, Down
+    Up, Down, None
 }
