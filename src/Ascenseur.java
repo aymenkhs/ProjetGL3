@@ -33,10 +33,21 @@ public class Ascenseur {
         */
 
         // here maybe we should put the direction to "none" cause there's no direction, or we should remove the direction entirely
-        if (etageCourrant ==  nb_etages){
-            direction = Direction.Down;
-        }else if(etageCourrant ==  0){
-            direction = Direction.Up;
+
+        if (!this.list_destinations.isEmpty()){
+            if (this.list_destinations.get(0).getDestination() > this.etageCourrant){
+                this.direction = Direction.Up;
+            }else {
+                this.direction = Direction.Down;
+            }
+        }else {
+            if (!this.list_appels.isEmpty()){
+                if (this.list_destinations.get(0).getEtageCourrant() > this.etageCourrant){
+                    this.direction = Direction.Up;
+                }else {
+                    this.direction = Direction.Down;
+                }
+            }
         }
     }
 
