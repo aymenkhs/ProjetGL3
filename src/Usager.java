@@ -10,10 +10,11 @@ public class Usager {
 
     private int num_usager;
 
-    public Usager(int etageCourrant, Direction direction) {
+    public Usager(int etageCourrant, Direction direction, int destination) {
         this.etageCourrant = etageCourrant;
         this.direction = direction;
         this.num_usager = Usager.nb_usager;
+        this.destination = destination;
         Usager.nb_usager++;
     }
 
@@ -42,7 +43,7 @@ public class Usager {
 
     public void signaler_destination(int destination){
         // here we're going to let the user enter the destination he's going to
-        this.destination = destination;
+        System.out.println("USAGER N°" + this.num_usager + ": entre la destination :" + this.destination);
     }
 
     public void sortir(){
