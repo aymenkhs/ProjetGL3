@@ -1,6 +1,7 @@
 import enums.Direction;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Ascenseur {
 
@@ -11,6 +12,7 @@ public class Ascenseur {
     private Direction direction;
     private ArrayList<Usager> list_destinations;
     private ArrayList<Usager> list_appels;
+    private Iterator<Usager> iterator;
 
     public Ascenseur(int nb_etages, ArrayList<Porte> list_portes) {
         this.nb_etages = nb_etages;
@@ -20,6 +22,7 @@ public class Ascenseur {
         this.direction = Direction.None;
         this.list_appels = new ArrayList<Usager>();
         this.list_destinations = new ArrayList<Usager>();
+        this.iterator=list_appels.iterator();
     }
 
     public void ajouterAppel(Usager u){
@@ -142,7 +145,9 @@ public class Ascenseur {
     }
 
     private void moving_to(){
-        for (Usager usager : this.list_appels){
+        while(iterator.hasNext()){
+
+            Usager usager= iterator.next();
 
             if (usager.getEtageCourrant() == this.etageCourrant && this.direction == Direction.None){
                 if (this.list_portes.get(this.etageCourrant).isTheDoorClosed()){
@@ -159,7 +164,7 @@ public class Ascenseur {
                     this.list_portes.get(this.etageCourrant).openTheDoor();
                 }
                 usager.entrer();
-                this.list_appels.remove(usager);
+                iterator.remove();
                 this.list_destinations.add(usager);
             }
         }
