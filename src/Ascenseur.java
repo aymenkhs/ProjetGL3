@@ -23,13 +23,13 @@ public class Ascenseur {
         this.list_destinations = new ArrayList<Usager>();
     }
 
-    public ArrayList<Usager> getList_destinations() {
-        return list_destinations;
-    }
+    public void setEtageCourrant(int etageCourrant) { this.etageCourrant = etageCourrant; }
 
-    public ArrayList<Usager> getList_appels() {
-        return list_appels;
-    }
+    public ArrayList<Usager> getList_destinations() { return list_destinations; }
+
+    public ArrayList<Usager> getList_appels() { return list_appels; }
+
+    public Direction getDirection() { return direction; }
 
     public void ajouterAppel(Usager u){
         list_appels.add(u);
@@ -164,7 +164,7 @@ public class Ascenseur {
                     this.list_portes.get(this.etageCourrant).openTheDoor();
                 }
                 usager.entrer();
-                this.list_appels.remove(usager);
+                iterator.remove();
                 this.list_destinations.add(usager);
                 this.direction = usager.getDirection();
             }else if (usager.getEtageCourrant() == this.etageCourrant && usager.getDirection() == this.direction){
