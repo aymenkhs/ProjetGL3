@@ -12,7 +12,6 @@ public class Ascenseur {
     private Direction direction;
     private ArrayList<Usager> list_destinations;
     private ArrayList<Usager> list_appels;
-    private Iterator<Usager> iterator;
 
     public Ascenseur(int nb_etages, ArrayList<Porte> list_portes) {
         this.nb_etages = nb_etages;
@@ -22,7 +21,14 @@ public class Ascenseur {
         this.direction = Direction.None;
         this.list_appels = new ArrayList<Usager>();
         this.list_destinations = new ArrayList<Usager>();
-        this.iterator=list_appels.iterator();
+    }
+
+    public ArrayList<Usager> getList_destinations() {
+        return list_destinations;
+    }
+
+    public ArrayList<Usager> getList_appels() {
+        return list_appels;
     }
 
     public void ajouterAppel(Usager u){
@@ -131,20 +137,23 @@ public class Ascenseur {
         this.list_portes.get(this.etageCourrant).closeTheDoor();
     }
 
-    private void moving_from(){
-        for (Usager usager : this.list_destinations){
+    public void moving_from(){
+        Iterator<Usager> iterator=list_destinations.iterator();
+        while(iterator.hasNext()){
+            Usager usager= iterator.next();
             if (usager.getDestination() == this.etageCourrant){
                 if (this.list_portes.get(this.etageCourrant).isTheDoorClosed()){
                     // open the gates
                     this.list_portes.get(this.etageCourrant).openTheDoor();
                 }
                 usager.sortir();
-                this.list_destinations.remove(usager);
+                iterator.remove();
             }
         }
     }
 
-    private void moving_to(){
+    public void moving_to(){
+        Iterator<Usager> iterator=list_appels.iterator();
         while(iterator.hasNext()){
 
             Usager usager= iterator.next();
