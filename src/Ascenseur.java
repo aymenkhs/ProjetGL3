@@ -23,6 +23,8 @@ public class Ascenseur {
         this.list_destinations = new ArrayList<Usager>();
     }
 
+    public void setDirection(Direction direction) { this.direction = direction; }
+
     public void setEtageCourrant(int etageCourrant) { this.etageCourrant = etageCourrant; }
 
     public ArrayList<Usager> getList_destinations() { return list_destinations; }
