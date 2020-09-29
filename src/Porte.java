@@ -3,7 +3,7 @@ import enums.Status;
 public class Porte {
 
     private int etage;
-    private Status status; // "closed" or "open"
+    private Status status; // "closed" ou "open"
 
     public Porte(int etage) {
         this.etage = etage;
