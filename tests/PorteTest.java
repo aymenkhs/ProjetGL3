@@ -8,7 +8,6 @@ public class PorteTest {
 
     @Test
     public void getEtage() {
-
         System.out.println("Test : getEtage");
 
         Porte instance= new Porte(3);
@@ -19,7 +18,7 @@ public class PorteTest {
 
     @Test
     public void isTheDoorClosed() {
-
+        //Verification si la porte est fermé
         System.out.println("Test : isTheDoorClosed");
 
         Porte instance= new Porte(4);

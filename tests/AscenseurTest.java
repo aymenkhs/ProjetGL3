@@ -12,6 +12,7 @@ public class AscenseurTest {
         System.out.println("Test : deplacer");
 
         //On teste si la fct deplacer deplace l'ascenseur et appelle aux fcts d'entrée et de sortie des usagers correctement
+        //Le resultat de ce test sera une forme de deroulement de scenario comme l'exemple dans l'enoncé
         ArrayList<Porte> doorList= new ArrayList<>();
         for(int i=0;i<10;i++){
             Porte porte= new Porte(i);
@@ -93,7 +94,7 @@ public class AscenseurTest {
         Ascenseur instance = new Ascenseur(10,doorList);
         instance.ajouterAppel(new Usager(0,Direction.Up,2));
         instance.moving_to();
-        //On teste si l'usager sort de l'ascenseur a sa destination (qui laissera la liste de destination vide
+        //On teste si l'usager sort de l'ascenseur a sa destination (qui laissera la liste de destination vide)
         instance.setEtageCourrant(2);
         int expres= 0;
         instance.moving_from();
